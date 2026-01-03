@@ -1,0 +1,33 @@
+https://www.codexworld.com/convert-html-to-pdf-using-javascript-jspdf/#:~:text=Generate%20PDF%20using%20JavaScript&text=Specify%20the%20content%20in%20text,generate%20and%20download%20PDF%20file.
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>		
+<script>
+window.jsPDF = window.jspdf.jsPDF;
+function languagePDF(){
+	$.ajaxSetup({
+				  headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				  }
+			   });
+	$.ajax({
+			url:GetlanguagePDF,
+			method:"POST",
+			data:{
+				_token:token
+			},
+			success:function(res){
+				var doc = new jsPDF();
+				doc.text(20, 20, 'विराट कोहली क्रिकेटर आहे');
+				doc.text(20, 30, 'This is client-side Javascript to generate a PDF.');
+
+				// Add new page
+				doc.addPage();
+				doc.text(20, 20, 'Visit CodexWorld.com');
+				
+				// Save the PDF
+				doc.save('document.pdf');
+			}
+	})
+}
+</script>

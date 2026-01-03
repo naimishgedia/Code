@@ -1,0 +1,30 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="form-group">
+	<div class="input_fields_wrap">
+		<div class="row" id="dynamic_div">
+				<input type="text" name="percentage_from[]"  class="form-control" placeholder="From">
+				<button class="add_field_button btn btn-info">ADD</button>
+			
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function() {
+    var max_fields  = 100; 
+    var wrapper   = $(".input_fields_wrap"); 
+    var add_button  = $(".add_field_button"); 
+    var x = 1; 
+    $(add_button).on("click",function(e){
+		e.preventDefault();
+        if(x < max_fields){ 
+            x++; 
+            $(wrapper).append('<div class="row" id="dynamic_div'+x+'"><input type="text" name="percentage_from[]"  class="form-control" placeholder="From"><button type="button" class="btn btn-danger remove_section" data-count="'+x+'">REMOVE</button></div>'); 
+        }
+    });
+	$(document).on('click','.remove_section',function(){
+		var count=$(this).data('count');
+		$("#dynamic_div"+count+"").remove();
+		x--;
+	})    
+}); 
+</script>
